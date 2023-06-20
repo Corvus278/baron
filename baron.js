@@ -732,7 +732,12 @@ function init(params) {
 
     manageEvents(out, params.event, 'on')
 
-    manageAttr(out.root, params.direction, 'on', instances.length)
+    var attr = manageAttr(out.root, params.direction, 'on', instances.length)
+
+    var id = +attr
+
+    params.index = id
+    out.params.index = id
     instances.push(out)
 
     if (process.env.NODE_ENV !== 'production') {
@@ -758,6 +763,7 @@ function init(params) {
 
     out.update()
 
+    console.debug('instances', instances)
     return out
 }
 
@@ -830,7 +836,7 @@ baron.prototype = {
         this.events = {}
 
         // DOM elements
-        this.root = params.root // Always html node, not just selector
+        this.root = params.root // Always an html node, not just a selector
         this.scroller = qs(params.scroller)
         if (process.env.NODE_ENV !== 'production') {
             if (this.scroller.tagName == 'body') {
