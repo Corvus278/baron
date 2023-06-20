@@ -763,7 +763,6 @@ function init(params) {
 
     out.update()
 
-    console.debug('instances', instances)
     return out
 }
 
